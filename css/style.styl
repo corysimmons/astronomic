@@ -1,0 +1,56 @@
+@import 'reset.css'
+@import 'jeet'
+
+cw = 1400px
+pad-lg = 30px
+pad-md = 15px
+bp1 = 675px
+
+.head
+  background: lighten(#eee, 70%)
+  > div
+    center(cw, pad-md)
+  .logo
+    float: left
+    width: 50%
+    margin-top: 15px
+    +below(bp1)
+      stack()
+      text-align: center
+      margin-bottom: 20px
+      margin-top: 10px
+    img
+      height: 40px
+  nav
+    float: left
+    width: 50%
+    text-align: right
+    overflow: hidden
+    +below(bp1)
+      stack()
+      text-align: center
+      margin-bottom: 20px
+    a
+      font-size: 12px
+      font-weight: bold
+      float: right
+      text-decoration: none
+      border-bottom: 5px solid
+      padding: 25px 15px
+      +below(bp1)
+        float: none
+        margin-left: 20px
+        border-bottom: 0
+        padding: 10px
+      text-align: center
+      color: darken(#eee, 70%)
+      &:nth-child(1)
+        border-color: lighten(blue, 60%)
+      &:nth-child(2)
+        border-color: lighten(mix(yellow, orange), 70%)
+      &:nth-child(3)
+        border-color: lighten(yellow, 50%)
+
+.masthead
+  background: lighten(#eee, 10%)
+  height: 500px
