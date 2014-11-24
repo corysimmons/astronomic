@@ -88,6 +88,7 @@ html
   padding-top: 50px
   > div
     padding: 15px
+    overflow: hidden
 
 h1, h2, h3, h4, h5, h6, p
   margin-top: 0
@@ -122,3 +123,27 @@ input[type="text"]
     @media (max-width: bp1)
       column(1/2)
       cycle(2, 5)
+
+.stream-content
+  overflow: hidden
+.stream
+  column(7/10)
+  border-radius: 6px
+  overflow: hidden
+  @media (max-width: bp1)
+    span(1)
+    margin-bottom: 30px
+.stream-chat
+  column(3/10)
+  @media (max-width: bp1)
+    span(1)
+  background: darken(white, 5%)
+  border-radius: 6px
+  margin-bottom: 30px
+
+.stream-content, .content > div, .content, html, body, .stream-chat
+  height: 100%
+
+.page-stream
+  .content
+    padding-bottom: 30px
