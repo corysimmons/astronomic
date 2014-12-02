@@ -1,4 +1,4 @@
-toyshop
-=======
+### Development
 
-Gulp of Elf, BrowserSync, Stylus, Autoprefixer, and error handling.
+- `npm i`
+- `gulp`
