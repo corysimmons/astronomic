@@ -55,6 +55,7 @@ bp1 = 960px
 
 html
   background: darken(white, 2%)
+  line-height: 1.5
 
 .head
   height: 50px
@@ -99,6 +100,8 @@ h1, h2, h3, h4, h5, h6, p
   color: mix(c2, black)
   font-weight: 100
   margin-bottom: 15px
+p
+  color: darken(white, 40%)
 
 h1
   font-size: 26px
@@ -130,23 +133,45 @@ input[type="text"]
 
 .stream-content
   overflow: hidden
-.stream
-  column(7/10)
-  border-radius: 6px
-  overflow: hidden
-  @media (max-width: bp1)
-    span(1)
+  .stream
+    column(7/10)
+    margin-bottom: 15px
+    img
+      border-radius: 6px
+  .streamer
     margin-bottom: 30px
-.stream-chat
-  column(3/10)
-  @media (max-width: bp1)
-    span(1)
-  background: darken(white, 5%)
-  border-radius: 6px
-  margin-bottom: 30px
-
-.stream-content, .content > div, .content, html, body, .stream-chat
-  height: 100%
+    h3
+      font-weight: bold
+  .stream-chat
+    column(3/10)
+    transition: all 250ms ease
+    .chat
+      background: darken(white, 5%)
+      height: calc(100% - 30px)
+      border-radius: 6px 6px 0 0
+      overflow: scroll
+      table
+        width: 100%
+        .chatter
+          font-weight: bold
+          text-align: right
+        td
+          padding: 15px
+          font-size: 12px
+          vertical-align: top
+          border-bottom: 1px solid darken(white, 10%)
+          &:first-child
+            padding-right: 0
+    .user-chat
+      background: darken(white, 10%)
+      border-radius: 0 0 6px 6px
+      height: 45px
+      border: 0
+      width: 100%
+      padding: 15px
+      font-size: 12px
+      position: relative
+      top: -15px
 
 .page-stream
   .content
