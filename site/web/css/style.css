@@ -2,12 +2,22 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300");
 .page-home {
   font-family: 'Open Sans', sans-serif;
-  background: url("../img/nebula-bot.jpg") center 120% no-repeat;
+  background: url("../img/nebula-bot.jpg") center 130% no-repeat;
   height: 100%;
 }
+@media (max-width: 960px) {
+  .page-home {
+    background: none;
+  }
+}
 .page-home body {
-  background: url("../img/nebula-top.png") center -10% no-repeat;
+  background: url("../img/nebula-top.png") center -20% no-repeat;
   height: 100%;
+}
+@media (max-width: 960px) {
+  .page-home body {
+    background: none;
+  }
 }
 .home-center {
   display: table;
