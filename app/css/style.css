@@ -1,22 +1,8 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300");
-html {
+html,
+body {
   font-family: 'Open Sans', sans-serif;
-  background: url("/img/nebula-bot.jpg") center 130% no-repeat;
   height: 100%;
-}
-@media (max-width: 960px) {
-  html {
-    background: none;
-  }
-}
-html body {
-  background: url("/img/nebula-top.png") center -20% no-repeat;
-  height: 100%;
-}
-@media (max-width: 960px) {
-  html body {
-    background: none;
-  }
 }
 .home-center {
   display: table;
