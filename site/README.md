@@ -1,4 +1,0 @@
-### Development
-
-- `npm i`
-- `gulp`

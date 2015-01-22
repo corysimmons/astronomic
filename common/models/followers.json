@@ -1,0 +1,26 @@
+{
+  "name": "Followers",
+  "plural": "followers",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "created": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "fromUser": {
+      "type": "belongsTo",
+      "model": "AstroUser",
+      "foreignKey": "fromUserId"
+    },
+    "toUser": {
+      "type": "belongsTo",
+      "model": "AstroUser",
+      "foreignKey": "toUserId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

@@ -1,0 +1,36 @@
+<h2>Example Channel &amp; User profile page</h2>
+
+<ul>
+    <li>Username: {{user.username}}</li>
+    <li>Membership: {{user.membership}}</li>
+    <li>Email: {{user.email}}</li>
+    <li>User ID (from user prop): {{user.id}}</li>
+    <li>User ID: {{channel.userId}}</li>
+    <li>Channel: {{channel.name}}</li>
+    <li>Channel ID:: {{channel.id}}</li>
+</ul>
+
+<video id="localVideo"></video>
+<div id="remoteVideos"></div>
+
+<script>
+  (function(window) {
+    var webrtc = new SimpleWebRTC({
+      // the id/element dom element that will hold "our" video
+      localVideoEl: 'localVideo',
+      // the id/element dom element that will hold remote videos
+      remoteVideosEl: 'remoteVideos',
+      // immediately ask for camera access
+      autoRequestMedia: true
+    });
+  
+
+    // we have to wait until it's ready
+    webrtc.on('readyToCall', function () {
+        // you can name it anything
+        webrtc.joinRoom('room');
+    });
+  })(window);
+
+
+</script>

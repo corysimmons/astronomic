@@ -1,0 +1,32 @@
+{
+  "name": "UserCategoryMetadata",
+  "plural": "metadata",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "createdAt": {
+      "type": "date"
+    },
+    "priority": {
+      "type": "number"
+    },
+    "enabled": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "astroUser": {
+      "type": "belongsTo",
+      "model": "AstroUser",
+      "foreignKey": "astroUserId"
+    },
+    "category": {
+      "type": "belongsTo",
+      "model": "Category",
+      "foreignKey": "categoryId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

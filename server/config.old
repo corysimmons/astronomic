@@ -1,0 +1,7 @@
+
+module.exports = {
+
+  host: process.env.HOST,
+  port: process.env.LOCAL_PORT
+
+};

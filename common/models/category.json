@@ -1,0 +1,36 @@
+{
+  "name": "Category",
+  "plural": "categories",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "string"
+    },
+    "uid": {
+      "type": "string"
+    },
+    "enabled": {
+      "type": "boolean",
+      "required": true
+    },
+    "createdAt": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "astroUsers": {
+      "type": "hasMany",
+      "model": "AstroUser",
+      "foreignKey": "astroUserId",
+      "through": "UserCategoryMetadata"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

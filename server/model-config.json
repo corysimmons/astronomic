@@ -1,0 +1,50 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ]
+  },
+  "User": {
+    "dataSource": "db",
+    "public": true
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": true
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Role": {
+    "dataSource": "astroDB",
+    "public": true
+  },
+  "Category": {
+    "dataSource": "astroDB",
+    "public": true
+  },
+  "Channel": {
+    "dataSource": "astroDB",
+    "public": true
+  },
+  "AstroUser": {
+    "dataSource": "astroDB",
+    "public": true
+  },
+  "UserCategoryMetadata": {
+    "dataSource": "astroDB",
+    "public": true
+  },
+  "Followers": {
+    "dataSource": "astroDB",
+    "public": true
+  }
+}

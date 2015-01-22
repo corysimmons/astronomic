@@ -1,0 +1,15 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "astroDB": {
+    "host": "ds053370.mongolab.com",
+    "port": 53370,
+    "database": "astrodb",
+    "username": "astronomic",
+    "password": "d1g12020Astrodb",
+    "name": "astroDB",
+    "connector": "mongodb"
+  }
+}

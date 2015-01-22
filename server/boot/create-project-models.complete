@@ -1,0 +1,151 @@
+// export function on boot to migrate intial data for project
+
+// special boot script to bring in the built-in user model and create a user
+
+// module.exports = function createUser(app) {
+//   // migrate user model and create admin user on boot
+//   app.dataSources.astroDB.automigrate('User', function(err) {
+//     if (err) throw err;
+
+//     app.models.User.create({
+//      username: 'admin', 
+//      email: 'foo@bar.com', 
+//      password: 'bar' }, function(err, user) {
+  
+//        // log the user creds to shell
+//        console.log("Created new user with username %s\r\n", user.username);
+//        console.log(user); 
+//    });
+//   });
+// };
+
+// Notes about the user model that aren't easy to find in docs
+// Auth works similar to heads up - logging in returns an api-key.
+// authorization over the API requires login first, which returns
+// a key "id" with a long value. This value is required for all subsequent
+// requests and can be placed in the header as "Authorization" or (if https)
+// in the URL's GET query params as "access_token=..." 
+// summary: 
+//    1. hit /api/users/login endpoint w/ json payload of credentials
+//    2. example response json => { "id": "abcdefg" }
+//    3. store the value from the response key "id" somewhere
+//    4. hit auth required endpoints w/ "access_token" in url or header e.g.
+//      /api/users/1/?access_token=abcdefg
+
+module.exports = function createData(app) {
+  var userId = null;
+
+  if (process.env.SYNCDB === true) {
+
+    // migrate user model and create admin user on boot
+    app.dataSources.astroDB.automigrate('AstroUser', function(err) {
+      if (err) throw err;
+
+      app.models.AstroUser.create({
+        username: 'admin', 
+        email: 'foo@bar.com', 
+        password: 'bar',
+        membership: 'superuser' }, function(err, user) {
+    
+          // log the user creds to shell
+          console.log("Created new user with username %s\r\n", user.username);
+          console.log(user); 
+          console.log("storing userId for later...\r\n \r\n");
+          userId = user.id;
+
+          app.dataSources.astroDB.automigrate('Channel', function(err) {
+            if (err) throw err;
+
+            app.models.Channel.create([
+              {name: 'Core Channel', createdAt: Date.now(), userId: userId}
+            ], function(err, channels) {
+              if (err) throw err;
+
+              // log created models from successful migration
+              console.log('Models created: \n', channels);
+            });
+          });
+      });
+    });
+
+    app.dataSources.astroDB.automigrate('Category', function(err) {
+      if (err) throw err;
+
+      app.models.Category.create([
+        {name: 'HTML', createdAt: Date.now(), enabled: true},
+        {name: 'CSS', createdAt: Date.now(), enabled: true},
+        {name: 'Web Development', createdAt: Date.now(), enabled: true},
+      ], function(err, categories) {
+        if (err) throw err;
+
+        // log created models from successful migration
+        console.log('Models created: \n', categories);
+      });
+    });
+
+    app.dataSources.astroDB.automigrate('UserCategoryMetadata', function(err) {
+      if (err) throw err;
+    });
+
+    (function(application, userId) {
+      var app = application;
+
+      setTimeout(function() {
+        app.models.Channel.find({include: 'astroUser', where: {slug: 'core-channel'}, limit: 1}, function(err, channel) {
+          if (err) throw err;
+
+          console.log(channel);
+
+          if (channel !== []) {
+            // if channel was returned
+            var channel = channel[0];  // find returns array; findOne would be better here
+            var user = channel.astroUser();
+
+            console.log("Does the find() return anything? Next line logs var ch to see");
+            console.log(channel);
+            console.log("Getting the user for Channel: %s", channel.name);
+            console.log("\r\n What user belongs to this channel? %s", user.username || user.email);
+            console.log("....");
+            console.log("\r\n**Lets add the channel %s to the user %s model instance", channel.name, user.username);
+
+            // see if this is adds the channel to the actual astrouser model for later use
+            channel.astroUser(user);
+            console.log(channel);
+
+            console.log(user);
+
+            var props = user.channel() == undefined ? console.log('props is undefined. user.channel() is no good') : console.log(props);
+
+            console.dir(user.channel);
+            
+            // enumerate over all methods, keys, etc.. 
+            //user.channel
+
+            console.log("\r\n");
+            console.log("Lets add some categories and metadata to our user!\r\n \r\n");
+
+            app.models.Category.findOne({where: {slug: 'html'}}, function(err, category) {
+              if (err) throw err;
+
+              console.log('Got category w/ name %s', category.name);
+
+              user.categories.add(category, function(err, metadata) {
+                if (err) throw err;
+
+                console.log(category);
+                console.log('Added category %s to user %s\'s subscription \r\n\r\n', category.name, user.username);
+              });
+            });
+            
+            // optionally get the user by running another query using the FK from channel
+            // app.models.User.findById(data[0].userId, function(err, userData) {
+            //   if (err) throw err;
+
+            //   console.log("User %s owns Channel %s", userData.username, data[0].name);
+            // });
+          }
+        });
+      }, 5000);
+    })(app, userId);
+  }
+};

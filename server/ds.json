@@ -1,0 +1,24 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "astroDB": {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "database": "astronomic",
+    "username": "andrewjhart",
+    "password": "",
+    "name": "astroDB",
+    "connector": "postgresql"
+  },
+  "heroku": {
+    "name": "heroku",
+    "connector": "postgresql",
+    "host": "ec2-54-197-241-82.compute-1.amazonaws.com",
+    "port": 5432,
+    "database": "da7jm1pc0411mc",
+    "username": "nfyfvlicwgkhgb",
+    "password": "34e12ujNo8f38axzKBpSO9Ka-F"
+  }
+}

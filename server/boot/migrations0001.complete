@@ -1,0 +1,36 @@
+// migrate new set of models 
+
+module.exports = function migrate(app) { 
+	app.dataSources.astroDB.automigrate('Followers', function(err) {
+		if (err) throw err;
+
+		// migrate was success, create data?
+		app.models.AstroUser.create({
+      username: 'drew', 
+      email: 'andruwhart@gmail.com', 
+      password: 'test',
+      membership: 'superuser' }, function(err, user) {
+        // log the user creds to shell
+        console.log("Created new user with username %s\r\n", user.username);
+        console.log(user); 
+
+          app.models.Channel.create([
+            {name: 'Drews Channel', createdAt: Date.now(), userId: user.id}
+          ], function(err, channels) {
+            if (err) throw err;
+
+            // log created models from successful migration
+            console.log('Models created: \n', channels);
+        });
+	    });
+	});
+
+	app.dataSources.astroDB.autoupdate('AstroUser', function(err, result) {
+		if (err) throw err;
+
+		console.log("Results of running autoupdate on AstroUser table");
+		console.log(result);
+	});
+
+};
+

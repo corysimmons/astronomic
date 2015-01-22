@@ -1,0 +1,34 @@
+<h2>Example User profile page</h2>
+
+{{#if users}}
+	{{#each users}}
+	  <ul>
+		<li>username: {{this.username}}</li>
+		<li>id: {{this.id}}</li>
+		{{#each this.channel}}
+			{{#if this.name}}
+				<li>channel: {{this.name}}</li>
+			{{/if}}
+		{{/each}}
+		{{#each this.followers}}
+				<li>{{this.fromUserId}}</li>
+				<li>{{this.toUserId}}</li>
+		{{/each}}
+	  </ul>
+	{{/each}}
+{{else}}
+<ul>
+    <li>Username: {{user.username}}</li>
+    <li>Membership: {{user.membership}}</li>
+    <li>Email: {{user.email}}</li>
+    <li>ID: {{user.id}}</li>
+    <li>Channel: {{channel.name}}</li>
+</ul>
+{{/if}}
+
+<script type="text/javascript">
+(function(window) {
+
+  console.log("standard JS w/i handlebars template");
+})(window || this);
+</script>

@@ -1,0 +1,51 @@
+{
+  "name": "AstroUser",
+  "plural": "astrousers",
+  "base": "User",
+  "idInjection": true,
+  "properties": {
+    "membership": {
+      "type": "string"
+    },
+    "isStreaming": {
+      "type": "boolean"
+    },
+    "devices": {
+      "type": "string"
+    },
+    "hasMetadata": {
+      "type": "boolean"
+    },
+    "channelId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "categories": {
+      "type": "hasMany",
+      "model": "Category",
+      "foreignKey": "categoryId",
+      "through": "UserCategoryMetadata"
+    },
+    "channel": {
+      "type": "belongsTo",
+      "model": "Channel",
+      "foreignKey": "channelId"
+    },
+    "followers": {
+      "type": "hasMany",
+      "model": "AstroUser",
+      "foreignKey": "fromUserId",
+      "through": "Followers"
+    },
+    "following": {
+      "type": "hasMany",
+      "model": "AstroUser",
+      "foreignKey": "toUserId",
+      "through": "Followers"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

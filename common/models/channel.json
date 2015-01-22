@@ -1,0 +1,30 @@
+{
+  "name": "Channel",
+  "plural": "channels",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "date"
+    },
+    "userId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "astroUser": {
+      "type": "belongsTo",
+      "model": "AstroUser",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}
